@@ -1960,14 +1960,7 @@ GeneralSettings.CreateButton2({
 	Name = "UNINJECT",
 	Function = GuiLibrary.SelfDestruct
 })
-GeneralSettings.CreateButton2({
-	Name = "REINJECT",
-	Function = function(calling)
-		GuiLibrary.SelfDestruct();
-		loadfile("vape/NewMainScript.lua")()
-	end
-})
-																																																	
+																																													
 local function loadVape()
 	if not shared.VapeIndependent then
 		loadstring(vapeGithubRequest("Universal.lua"))()
