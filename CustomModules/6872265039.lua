@@ -78,7 +78,7 @@ local function GetURL(scripturl)
 	if shared.VapeDeveloper then
 		return readfile("vape/"..scripturl)
 	else
-		return game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/main/"..scripturl, true)
+		return game:HttpGet("https://raw.githubusercontent.com/NovolineRbx/NovolineForRoblox/main/"..scripturl, true)
 	end
 end
 
@@ -149,6 +149,9 @@ end
 local function runcode(func)
 	func()
 end
+local function runFunction(func)
+	func()
+end
 
 local function betterfind(tab, obj)
 	for i,v in pairs(tab) do
@@ -190,7 +193,7 @@ local function getcustomassetfunc(path)
 			textlabel:Remove()
 		end)
 		local req = requestfunc({
-			Url = "https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/main/"..path:gsub("vape/assets", "assets"),
+			Url = "https://raw.githubusercontent.com/NovolineRbx/NovolineForRoblox/main/"..path:gsub("vape/assets", "assets"),
 			Method = "GET"
 		})
 		writefile(path, req.Body)
