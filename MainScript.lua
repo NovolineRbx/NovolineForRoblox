@@ -143,7 +143,7 @@ local function vapeGithubRequest(scripturl)
 				displayErrorPopup("The connection to github is taking a while, Please be patient.")
 			end
 		end)
-		suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
+		suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/NovolineRbx/NovolineForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
 		if not suc or res == "404: Not Found" then
 			displayErrorPopup("Failed to connect to github : vape/"..scripturl.." : "..res)
 			error(res)
@@ -182,7 +182,7 @@ local function downloadVapeAsset(path)
 	return getcustomasset(path)
 end
 
-assert(not shared.VapeExecuted, "Vape Already Injected")
+assert(not shared.VapeExecuted, "Novoline Already Injected")
 shared.VapeExecuted = true
 
 for i,v in pairs({baseDirectory:gsub("/", ""), "vape", "vape/Libraries", "vape/CustomModules", "vape/Profiles", baseDirectory.."Profiles", "vape/assets"}) do
@@ -288,6 +288,11 @@ local Novoline = GuiLibrary.CreateWindow({
 	Icon = "vape/assets/BlatantIcon.png",
 	IconSize = 16
 })
+local Exploits = GuiLibrary.CreateWindow({
+	Name = "Exploits",
+	Icon = "vape/assets/TargetIcon2.png",
+	IconSize = 16
+})
 local Render = GuiLibrary.CreateWindow({
 	Name = "Render",
 	Icon = "vape/assets/RenderIcon.png",
@@ -337,6 +342,12 @@ GUI.CreateButton({
 	Icon = "vape/assets/BlatantIcon.png",
 	IconSize = 16
 })
+GUI.CreateButton({
+	Name = "Exploits",
+	Function = function(callback) Exploits.SetVisible(callback) end,
+	Icon = "vape/assets/TargetIcon2.png",
+	IconSize = 16
+})			
 GUI.CreateButton({
 	Name = "Render",
 	Function = function(callback) Render.SetVisible(callback) end,
@@ -1584,7 +1595,8 @@ local windowSortOrder = {
 	RenderButton = 3,
 	UtilityButton = 4,
 	WorldButton = 5,
-	NovolineWindow = 7,																																				
+	NovolineWindow = 7,
+	ExploitsWindow = 8,																																				
 	FriendsButton = 6,
 	TargetsButton = 7,
 	ProfilesButton = 8
@@ -1807,7 +1819,7 @@ local teleportConnection = playersService.LocalPlayer.OnTeleport:Connect(functio
 			if shared.VapeDeveloper then
 				loadstring(readfile("vape/NewMainScript.lua"))()
 			else
-				loadstring(game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/"..readfile("vape/commithash.txt").."/NewMainScript.lua", true))()
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/NovolineRbx/NovolineForRoblox/"..readfile("vape/commithash.txt").."/NewMainScript.lua", true))()
 			end
 		]]
 		if shared.VapeDeveloper then
@@ -1948,7 +1960,14 @@ GeneralSettings.CreateButton2({
 	Name = "UNINJECT",
 	Function = GuiLibrary.SelfDestruct
 })
-
+GeneralSettings.CreateButton2({
+	Name = "REINJECT",
+	Function = function(calling)
+		GuiLibrary.SelfDestruct();
+		loadfile("vape/NewMainScript.lua")()
+	end
+})
+																																																	
 local function loadVape()
 	if not shared.VapeIndependent then
 		loadstring(vapeGithubRequest("Universal.lua"))()
@@ -1956,7 +1975,7 @@ local function loadVape()
 			loadstring(readfile("vape/CustomModules/"..game.PlaceId..".lua"))()
 		else
 			if not shared.VapeDeveloper then
-				local suc, publicrepo = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/"..readfile("vape/commithash.txt").."/CustomModules/"..game.PlaceId..".lua") end)
+				local suc, publicrepo = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/NovolineRbx/NovolineForRoblox/"..readfile("vape/commithash.txt").."/CustomModules/"..game.PlaceId..".lua") end)
 				if suc and publicrepo and publicrepo ~= "404: Not Found" then
 					writefile("vape/CustomModules/"..game.PlaceId..".lua", "--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.\n"..publicrepo)
 					loadstring(readfile("vape/CustomModules/"..game.PlaceId..".lua"))()
