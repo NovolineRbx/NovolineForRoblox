@@ -23,7 +23,7 @@ local function GetURL(scripturl)
 	if shared.VapeDeveloper then
 		return readfile("vape/"..scripturl)
 	else
-		return game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/main/"..scripturl, true)
+		return game:HttpGet("https://raw.githubusercontent.com/NovolineRbx/NovolineForRoblox/main/"..scripturl, true)
 	end
 end
 local bettergetfocus = function()
