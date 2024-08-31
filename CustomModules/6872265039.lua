@@ -149,9 +149,6 @@ end
 local function runcode(func)
 	func()
 end
-local function runFunction(func)
-	func()
-end
 
 local function betterfind(tab, obj)
 	for i,v in pairs(tab) do
